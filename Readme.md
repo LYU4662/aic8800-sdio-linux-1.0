@@ -52,7 +52,7 @@
 
 
 
-在设备板上使用dkms编译驱动，编译完成后启动自动加载wifi驱动。
+在设备板上使用dkms编译驱动，编译完成后启动自动加载wifi驱动。(在板上编译需要使用armbian-config 安装linux-header, 请自行查找armbian安装linux-header教程)
 
 ```shell
 sudo apt install dkms 
