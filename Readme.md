@@ -11,7 +11,33 @@
 系统为armbian 6.7.12内核，armbian镜像见下方链接，该镜像需要修改wifi蓝牙设备树，其他设备按需修改即可
 
 ```c
- rfkill {
+mmc@4021000 {
+			compatible = "allwinner,sun50i-h616-mmc\0allwinner,sun50i-a100-mmc";
+			reg = <0x4021000 0x1000>;
+			clocks = <0x02 0x40 0x02 0x3d>;
+			clock-names = "ahb\0mmc";
+			resets = <0x02 0x0f>;
+			reset-names = "ahb";
+			interrupts = <0x00 0x24 0x04>;
+			pinctrl-names = "default";
+			pinctrl-0 = <0x15>;
+			status = "okay";
+			max-frequency = <50000000>;
+			mmc-ddr-1_8v;
+			no-sd;
+			no-mmc;
+			cap-sdio-irq;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			mmc-pwrseq = <0x16>;
+			phandle = <0x54>;
+			bus-width = <0x04>;
+			non-removable;
+			vmmc-supply = <0x12>;
+			vqmmc-supply = <0x11>;
+		};
+
+rfkill {
         compatible = "allwinner,sunxi-rfkill";
         status = "okay";
         chip_en;
@@ -63,7 +89,9 @@ sudo cp -r aic8800-sdio-linux-1.0 /usr/src/aic8800-sdio-linux-1.0
 
 sudo cp -r aic8800-sdio-linux-1.0/firmware/*  /usr/lib/firmware/ 
 
-cd /usr/src/aic8800-sdio-linux-1.0 
+cd /usr/src/
+
+chmod 777 -R aic8800-sdio-linux-1.0/
 
 sudo dkms add -m aic8800-sdio-linux -v 1.0 
 
