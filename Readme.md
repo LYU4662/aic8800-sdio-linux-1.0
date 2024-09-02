@@ -117,7 +117,7 @@ echo "aic8800_btlpm" > aic8800.conf
 bluetoothctl也可以正常使用。但是启动后会消失该配置，所以要在启动脚本中添加这条命令，我使用的是armbian，则修改/etc/rc.local
 
 ```sh
-vim /etc/rc.loacl
+vim /etc/rc.local
 ```
 
 修改里面的内容如下
@@ -140,6 +140,13 @@ vim /etc/rc.loacl
 sleep 1   #如需要蓝牙音频要下载pulseaudio 并开机启动
 pulseaudio --start # 同上
 exit 0
+```
+
+添加蓝牙音频软件包，添加完成后重启设备
+```sh
+sudo apt update
+sudo apt -y install pulseaudio-module-bluetooth
+pulseaudio --start
 ```
 
 至此蓝牙wifi都能正常工作！
